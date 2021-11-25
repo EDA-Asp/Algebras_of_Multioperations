@@ -4,7 +4,7 @@ from Algs.factories.args_generators import get_all_generators
 from Algs.factories.closing_by_signature import get_closing_w
 from Algs.factories.mappings import get_mapping_f_to_num, get_mapping_num_to_f
 from Algs.factories.metaoperations import get_metaoperation_for_clc, get_metaoperations_for_closing_by_signature
-from helpers import parse_signature
+from Algs.helpers import parse_signature
 
 
 def alg_factory(signature, parallel=True, bound=None, sheffer_list=(), chunk_size=10_000):
