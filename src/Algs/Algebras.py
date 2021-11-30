@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
 
 
-
-
 class AlgBase(ABC):
 
     def __init__(self, n, r, basis, metaoperations):
@@ -36,6 +34,3 @@ class AlgBase(ABC):
     @abstractmethod
     def __iter__(self):
         pass
-
-
-

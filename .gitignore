@@ -1,3 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 /dist
 /venv
+/src/algebras_of_multioperations.egg-info/
+/.idea/Algebras of Multioperations.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/vcs.xml

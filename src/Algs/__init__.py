@@ -8,6 +8,7 @@ from Algs.helpers import parse_signature
 
 
 def alg_factory(signature, parallel=True, bound=None, sheffer_list=(), chunk_size=10_000):
+
     t, n, r, metaoperations_s = parse_signature(signature)
 
     metaoperations = get_metaoperation_for_clc(n, r, t)
@@ -19,21 +20,17 @@ def alg_factory(signature, parallel=True, bound=None, sheffer_list=(), chunk_siz
     generators_for_closing = get_all_generators(n)
 
     if '-1' in metaoperations_s:
-        closing = get_closing_w(metaoperations_for_closing,
-                                generators_for_closing,
-                                all_num,
-                                bound=bound,
-                                sheffer_list=sheffer_list,
-                                chunk_size=chunk_size,
-                                parallel=parallel, basis_extend=metaoperations['-1'])
+        basis_extend = metaoperations['-1']
     else:
-        closing = get_closing_w(metaoperations_for_closing,
-                                generators_for_closing,
-                                all_num,
-                                bound=bound,
-                                sheffer_list=sheffer_list,
-                                chunk_size=chunk_size,
-                                parallel=parallel, basis_extend=None)
+        basis_extend = None
+
+    closing = get_closing_w(metaoperations_for_closing,
+                            generators_for_closing,
+                            all_num,
+                            bound=bound,
+                            sheffer_list=sheffer_list,
+                            chunk_size=chunk_size,
+                            parallel=parallel, basis_extend=basis_extend)
 
     class Alg(AlgBase):
 
