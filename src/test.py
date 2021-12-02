@@ -30,7 +30,7 @@ if __name__ == '__main__':
              (0, 1, 2, 0, 1, 2, 0, 1, 2)}
 
     a_1 = cls_alg(basis)
-    print(a_1.metaoperations['*'](b_op_1_t_f, b_op_1_t_f, b_op_1_t_f))
+    print(cls_alg.metaoperations['*'](b_op_1_t_f, b_op_1_t_f, b_op_1_t_f))
     print(a_1.mapping_f_to_num((0, 0, 0, 0, 2, 0, 1, 0, 1)))
     print(a_1.mapping_f_to_num((0, 0, 0, 1, 1, 1, 2, 2, 2)))
 
