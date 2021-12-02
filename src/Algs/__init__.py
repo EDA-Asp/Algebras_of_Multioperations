@@ -11,16 +11,16 @@ def alg_factory(signature, parallel=True, bound=None, sheffer_list=(), chunk_siz
 
     t, n, r, metaoperations_s = parse_signature(signature)
 
-    metaoperations = get_metaoperation_for_clc(n, r, t)
+    metaoperations_dict = get_metaoperation_for_clc(n, r, t)
     mapping_num_to_f = get_mapping_num_to_f(t, r, r ** n)
     mapping_f_to_num = get_mapping_f_to_num(t, r)
     all_num = r ** (r ** n) if t == 'op' else (2 ** r) ** (r ** n)
 
-    metaoperations_for_closing = get_metaoperations_for_closing_by_signature(metaoperations_s, metaoperations)
+    metaoperations_for_closing = get_metaoperations_for_closing_by_signature(metaoperations_s, metaoperations_dict)
     generators_for_closing = get_all_generators(n)
 
     if '-1' in metaoperations_s:
-        basis_extend = metaoperations['-1']
+        basis_extend = metaoperations_dict['-1']
     else:
         basis_extend = None
 
@@ -33,9 +33,10 @@ def alg_factory(signature, parallel=True, bound=None, sheffer_list=(), chunk_siz
                             parallel=parallel, basis_extend=basis_extend)
 
     class Alg(AlgBase):
+        metaoperations = metaoperations_dict
 
         def __init__(self, basis):
-            AlgBase.__init__(self, n, r, basis, metaoperations)
+            AlgBase.__init__(self, basis)
 
         @staticmethod
         def mapping_f_to_num(f):
