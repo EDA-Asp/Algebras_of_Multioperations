@@ -3,15 +3,11 @@ from abc import ABC, abstractmethod
 
 class AlgBase(ABC):
 
-    def __init__(self, n, r, basis, metaoperations):
+    def __init__(self, basis):
         self.basis = basis
         self.alg = tuple()  # tuple of nums which represent operations/multioperations
-        self.r = r
-        self.n = n
-        # self.t = t
         self.closed = False
         self.closed_state = None
-        self.metaoperations = metaoperations
 
     @staticmethod
     @abstractmethod
