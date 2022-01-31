@@ -1,13 +1,11 @@
+from Algs.factories.args_generators import get_all_generators
 from Algs.factories.closing_by_signature.closing_by_signature import get_closing
 
 
-
-
-
-def get_closing_w(superposition_imap_list, gen_args_list, all_num, sheffer_list=(), chunk_size=10_000,
+def get_closing_n(superposition_imap_list, n, all_num, sheffer_list=(), chunk_size=10_000,
                   parallel=False,
                   bound=None, basis_extend=None):
-
+    gen_args_list = get_all_generators(n)
 
     closings_list = []
     for superposition, gen in zip(superposition_imap_list, gen_args_list):
@@ -23,8 +21,8 @@ def get_closing_w(superposition_imap_list, gen_args_list, all_num, sheffer_list=
             return set(), 'Sh'
 
         if len(closings_list) == 1:
-            alg_cloese = closings_list[0](basis)
-            return alg_cloese
+            alg_close = closings_list[0](basis)
+            return alg_close
         else:
             cnt = len(closings_list)
             while cnt > 0:
