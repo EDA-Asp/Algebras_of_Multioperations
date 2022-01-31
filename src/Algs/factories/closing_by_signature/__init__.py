@@ -24,18 +24,20 @@ def get_closing_n(superposition_imap_list, n, all_num, sheffer_list=(), chunk_si
             alg_close = closings_list[0](basis)
             return alg_close
         else:
+            saved_rez = [set() for i in range(len(closings_list))]
             cnt = len(closings_list)
             while cnt > 0:
-                for closing_alg in closings_list:
-                    alg_close = closing_alg(basis)
+                for idx, closing_alg in enumerate(closings_list):
+                    if saved_rez[idx] == basis:
+                        cnt = cnt - 1
+                        continue
+                    else:
+                        if cnt <= len(closings_list) -1:
+                            cnt = cnt + 1
+                    alg_close = closing_alg(set.difference(basis, saved_rez[idx]), saved_rez[idx])
                     if alg_close[1] == 'Sh' or alg_close[1] == 'Bond':
                         return alg_close
-                    if len(alg_close[0]) == len(basis):
-                        cnt = cnt - 1
-                    else:
-                        if cnt <= 1:
-                            cnt = cnt + 1
+                    saved_rez[idx] = alg_close[0]
                     basis = alg_close[0]
-        return alg_close
-
+            return alg_close
     return closing

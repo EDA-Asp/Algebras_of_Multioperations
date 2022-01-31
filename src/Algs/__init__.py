@@ -1,7 +1,7 @@
 from Algs.Algebras import AlgBase
-from Algs.Algs_exceptions import AlgIter
+from Algs.Exceptions import AlgIter
 from Algs.factories.args_generators import get_all_generators
-from Algs.factories.closing_by_signature import get_closing_w
+from Algs.factories.closing_by_signature import get_closing_n
 from Algs.factories.mappings import get_mapping_f_to_num, get_mapping_num_to_f
 from Algs.factories.metaoperations import get_metaoperation_for_clc, get_metaoperations_for_closing_by_signature
 from Algs.helpers import parse_signature
@@ -12,20 +12,20 @@ def alg_factory(signature, parallel=True, bound=None, sheffer_list=(), chunk_siz
     t, n, r, metaoperations_s = parse_signature(signature)
 
     metaoperations_dict = get_metaoperation_for_clc(n, r, t)
-    mapping_num_to_f = get_mapping_num_to_f(t, r, r ** n)
+    mapping_num_to_f = get_mapping_num_to_f(t, r, n)
     mapping_f_to_num = get_mapping_f_to_num(t, r)
     all_num = r ** (r ** n) if t == 'op' else (2 ** r) ** (r ** n)
 
     metaoperations_for_closing = get_metaoperations_for_closing_by_signature(metaoperations_s, metaoperations_dict)
-    generators_for_closing = get_all_generators(n)
+
 
     if '-1' in metaoperations_s:
         basis_extend = metaoperations_dict['-1']
     else:
         basis_extend = None
 
-    closing = get_closing_w(metaoperations_for_closing,
-                            generators_for_closing,
+    closing = get_closing_n(metaoperations_for_closing,
+                            n,
                             all_num,
                             bound=bound,
                             sheffer_list=sheffer_list,

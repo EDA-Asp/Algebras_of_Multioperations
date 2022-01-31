@@ -23,9 +23,9 @@ class AlgBase(ABC):
     def closing(self):
         pass
 
-    @abstractmethod
-    def _save_alg(self, closure):
-        pass
+    # @abstractmethod
+    # def _save_alg(self, closure):
+    #     pass
 
     @abstractmethod
     def __iter__(self):

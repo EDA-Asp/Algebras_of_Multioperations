@@ -9,10 +9,14 @@ def make_s_close(superposition_imap, gen_args, all_num, sheffer_list=(), bound=N
     else:
         msg = f'Bond_{bound}'
 
-    def closing_s(basis):
-        if any(map(lambda x: x in sheffer_list, basis)):
+    def closing_s(new_mops, old_mops=None):
+        if any(map(lambda x: x in sheffer_list, new_mops)):
             return set(), 'Sh'
-        alg_close_substitution, new_mops_substitution = set(), basis.copy()
+        if old_mops:
+            alg_close_substitution = old_mops.copy()
+        else:
+            alg_close_substitution = set()
+        new_mops_substitution = new_mops.copy()
         while 1:
             for fs in map(superposition_imap, gen_args(new_mops_substitution,
                                                        alg_close_substitution)):
