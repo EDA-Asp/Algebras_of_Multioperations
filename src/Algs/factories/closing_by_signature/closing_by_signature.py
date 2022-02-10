@@ -41,8 +41,12 @@ def make_p_close(superposition_imap, gen_args, all_num, sheffer_list=(), chunk_s
     else:
         msg = f'Bond_{bound}'
 
-    def closing_p(basis):
-        alg_close_substitution, new_mops_substitution = set(), basis.copy()
+    def closing_p(new_mops, old_mops=None):
+        if old_mops:
+            alg_close_substitution = old_mops.copy()
+        else:
+            alg_close_substitution = set()
+        new_mops_substitution = new_mops.copy()
         with Pool() as pool:
             while 1:
                 for fs in pool.imap_unordered(superposition_imap, gen_args(new_mops_substitution,

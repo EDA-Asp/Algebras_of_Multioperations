@@ -17,7 +17,7 @@ def get_gen_superposition(n):
         else:
             return ()
 
-    def n_gen_args(substitution_new, substitution_old):
+    def n_ary_superposition_gen_args(substitution_new, substitution_old):
 
         it = chain(gen_substitution_new(substitution_new.copy(), n + 1),
                    gen_substitution_binary_cross_n(substitution_new.copy(), substitution_old.copy()))
@@ -26,7 +26,7 @@ def get_gen_superposition(n):
         substitution_new.clear()
         return it
 
-    return n_gen_args
+    return n_ary_superposition_gen_args
 
 
 def get_gen_intersection_and_union(n):
